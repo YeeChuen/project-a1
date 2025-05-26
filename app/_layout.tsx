@@ -9,6 +9,6 @@ export default function RootLayout() {
       headerTintColor: "white" // <-- header text color
     }}
   >
-    <Stack.Screen name='index' options = {{ title: 'Home'}}/>
+    <Stack.Screen name='index' options = {{ headerShown: false }}/>
   </Stack>;
 }

@@ -2,39 +2,36 @@ import * as React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import { BottomNavigation } from "react-native-paper";
-
-const MusicRoute = () => <Text>Music</Text>;
-
-const AlbumsRoute = () => <Text>Albums</Text>;
-
-const RecentsRoute = () => <Text>Recents</Text>;
-
-const NotificationsRoute = () => <Text>Notifications</Text>;
+import Home from "./Home";
+import Workouts from "./Workouts";
+import Progress from "./Progress";
 
 export default function Index() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
-      key: "music",
-      title: "Favorites",
-      focusedIcon: "heart",
-      unfocusedIcon: "heart-outline",
+      key: "home",
+      title: "Home",
+      focusedIcon: "home",
+      unfocusedIcon: "home-outline",
     },
-    { key: "albums", title: "Albums", focusedIcon: "album" },
-    { key: "recents", title: "Recents", focusedIcon: "history" },
     {
-      key: "notifications",
-      title: "Notifications",
-      focusedIcon: "bell",
-      unfocusedIcon: "bell-outline",
+      key: "workouts",
+      title: "Workouts",
+      focusedIcon: "arm-flex",
+      unfocusedIcon: "arm-flex-outline",
+    },
+    {
+      key: "progress",
+      title: "Progress",
+      focusedIcon: "equalizer",
+      unfocusedIcon: "equalizer-outline",
     },
   ]);
-
   const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-    notifications: NotificationsRoute,
+    home: Home,
+    workouts: Workouts,
+    progress: Progress,
   });
 
   return (
