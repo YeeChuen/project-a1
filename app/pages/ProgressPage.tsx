@@ -1,9 +1,14 @@
 import React from 'react'
+import { View } from 'react-native';
 import { Text } from "react-native-paper";
+import Counter from '../components/Counter';
 
 const ProgressPage = () => {
   return (
-    <Text>ProgressPage</Text>
+    <View>
+        <Text>WorkoutsPage</Text>
+        <Counter />
+    </View>
   )
 }
 
