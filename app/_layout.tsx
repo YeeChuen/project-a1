@@ -4,11 +4,11 @@ export default function RootLayout() {
   return <Stack 
     screenOptions={{
       headerStyle: {
-        backgroundColor: 'green' // <-- header background color
+        backgroundColor: '#f3edf6' // <-- header background color
       },
-      headerTintColor: "white" // <-- header text color
+      headerTintColor: "black", // <-- header text color
     }}
   >
-    <Stack.Screen name='index' options = {{ headerShown: false }}/>
+    <Stack.Screen name='screens/workouts/SelectWorkout' options = {{ headerBackVisible: true }}/>
   </Stack>;
 }

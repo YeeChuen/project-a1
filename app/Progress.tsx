@@ -1,9 +1,13 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import ProgressPage from "./pages/ProgressPage";
+import ProgressPage from "./screens/progress/ProgressPage";
+import { View, SafeAreaView } from "react-native";
 
 const Progress = () => {
-  return <ProgressPage />;
+  return (
+    <View>
+      <ProgressPage />
+    </View>
+  );
 };
 
 export default Progress;

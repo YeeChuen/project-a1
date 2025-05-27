@@ -1,9 +1,13 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import WorkoutsPage from "./pages/WorkoutsPage";
+import WorkoutsPage from "./screens/workouts/WorkoutsPage";
+import { View, SafeAreaView } from "react-native";
 
 const Workouts = () => {
-  return <WorkoutsPage />;
+  return (
+    <View>
+      <WorkoutsPage />
+    </View>
+  );
 };
 
 export default Workouts;
