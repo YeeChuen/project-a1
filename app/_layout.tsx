@@ -1,14 +1,10 @@
 import { Stack } from "expo-router";
+import { TextInput } from "react-native-paper";
 
 export default function RootLayout() {
-  return <Stack 
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: '#f3edf6' // <-- header background color
-      },
-      headerTintColor: "black", // <-- header text color
-    }}
-  >
-    <Stack.Screen name='screens/workouts/SelectWorkout' options = {{ headerBackVisible: true }}/>
+  return <Stack>
+    <Stack.Screen name="(tabs)" options={{ headerShown: false }}/>
+    {/* <Stack.Screen name="index" options={{title: 'Home'}}/>
+    <Stack.Screen name="login" options={{title: 'Login'}}/> */}
   </Stack>;
 }

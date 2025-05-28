@@ -1,0 +1,43 @@
+YT course: https://www.youtube.com/watch?v=J50gwzwLvAk
+Code Repo for reference: https://github.com/machadop1407/react-native-course-habit-tracker
+Advance Repo for reference: https://github.com/machadop1407/react-native-course-habit-tracker/tree/advanced-code
+
+main native component:
+    <View /> : like <div /> in html
+    <Text /> : use to display text on screenm like <p /> in html
+    <TextInput /> : get text from user like <input /> in html, used for login form, or search bar
+    <ScrollView /> : create a scrollable area when it exceed the screen area
+
+
+Expo: https://expo.dev/
+    help with development and some prebuild component you can use to access camera, GPS, etc.
+
+    npx create-expo-app . : boiler plate to build set up expo app in current directory
+
+    npx expo start : start your expo app for development
+
+    _layout.tsx : 
+        RootLayout() is where shared UI element being defined, such as header, tabs etc.
+
+        <Stack /> : 
+            - defined which ever screen you are in, its like react router in react.
+            - meaning you can wrap component around it. and everything else will have this
+            - to create new screen/navigation, just create new file within the `app` folder
+        
+        <Stack.Screen /> : 
+            - wrap by <Stack />
+                - name : is the title string
+                - options : options prop allow you to modify the screen
+
+        To change between screen
+            <Link /> : use Link tag, and pass in a href (route to your screen)
+
+        To do bottom navbar, you need to create a dedicated folder name `(tabs)`
+            Then instead of <Stack /> you wanna use <Tabs />
+        
+        <Tabs /> : for bottom navigation
+            
+    index.tsx : 
+
+Icon:
+    https://icons.expo.fyi/Index
