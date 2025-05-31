@@ -7,7 +7,15 @@ main native component:
     <Text /> : use to display text on screenm like <p /> in html
     <TextInput /> : get text from user like <input /> in html, used for login form, or search bar
     <ScrollView /> : create a scrollable area when it exceed the screen area
+    <KeyboardAvoidingView /> : this view will not be covered by keyboard (such as forms)
+        with prop behavior={Platform.OS === "ios" ? "padding" : "height"}
+    <Button /> : since this is an app, we use onPress, not onClick
 
+Route Guard:
+    a component that wrap around your <Stack /> 
+        
+    a simple usage is that check if the user is login
+    if yes then you can show the tab and everything inside, or else it show the auth page.
 
 Expo: https://expo.dev/
     help with development and some prebuild component you can use to access camera, GPS, etc.
@@ -41,3 +49,6 @@ Expo: https://expo.dev/
 
 Icon:
     https://icons.expo.fyi/Index
+
+Local RN App storage:
+    https://github.com/sunnylqm/react-native-storage
