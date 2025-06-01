@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
-import { SafeAreaView } from "react-native";
-import { TextInput } from "react-native-paper";
+import { PaperProvider } from "react-native-paper";
 
 export default function RootLayout() {
   return (
@@ -9,11 +8,11 @@ export default function RootLayout() {
           name="(tabs)"
           options={{ headerShown: false, animation: "ios_from_left" }}
         />
-        {/* <Stack.Screen name="index" options={{title: 'Home'}}/>
-    <Stack.Screen name="login" options={{title: 'Login'}}/> */}
-
-        <Stack.Screen name="replace"options={{ headerShown: false }} />
-        <Stack.Screen name="form" options={{ presentation: "formSheet" }} />
+        <Stack.Screen name="StartSession" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="CreateSession"
+          options={{ presentation: "formSheet" }}
+        />
       </Stack>
   );
 }

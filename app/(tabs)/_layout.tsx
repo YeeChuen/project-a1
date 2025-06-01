@@ -1,32 +1,25 @@
 import { Tabs } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "coral",
-        tabBarActiveBackgroundColor: "green",
-      }}
-    >
+    <Tabs screenOptions={{}}>
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) =>
-            focused ? (
-              <AntDesign name="star" size={24} color={color} />
-            ) : (
-              <AntDesign name="home" size={24} color={color} />
-            ),
+          title: "Sessions",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="running" size={24} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="login"
+        name="Progress"
         options={{
-          title: "Login",
+          title: "Progress",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="login" size={24} color={color} />
+            <FontAwesome5 name="chart-bar" size={24} color={color} />
           ),
         }}
       />
