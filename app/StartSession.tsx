@@ -5,7 +5,8 @@ import {
   useLocalSearchParams,
   useRouter,
 } from "expo-router";
-import { mockSessions, TSession } from "./(tabs)";
+import { mockSessions } from "./(tabs)";
+import { TSession } from "@/lib/utils/types";
 
 export default function StartSession() {
   const params: TStartSessionParams = useLocalSearchParams();

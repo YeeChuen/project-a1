@@ -1,13 +1,12 @@
-import { View, Text, Button } from "react-native";
-import React from "react";
+import SessionForm from "@/lib/components/sessions/SessionForm";
 import { useRouter } from "expo-router";
+import React from "react";
+import { Button, Text, View } from "react-native";
 
 export default function CreateSession() {
   return (
     <View>
-      <Text>CreateSession</Text>
-      <Text>TODO: form for user to create new session / workout.</Text>
-      <Text>When created, should save to local storage</Text>
+      <SessionForm />
     </View>
   );
 }

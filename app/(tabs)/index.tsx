@@ -1,30 +1,22 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Modal,
+  SafeAreaView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Divider, Drawer } from "react-native-paper";
 import { RelativePathString, usePathname, useRouter } from "expo-router";
 import { goToStartSession } from "../StartSession";
-
-type TSets = {
-  reps: number;
-  weights: number; // 0 equal to body weight / no weight is used
-  duration?: number; // duration mainly used for cardio, such as HIIT or low intensity, Experimental atm
-};
-
-type TExercise = {
-  id: number;
-  exerciseName: string;
-  description: string;
-  sets: TSets[];
-};
-
-export type TSession = {
-  id: number;
-  sessionName: string;
-  exercises: TExercise[];
-};
+import { TSession } from "@/lib/utils/types";
+import { styleConstant } from "@/lib/utils/styleConstants";
+import CreateSession from "../CreateSession";
 
 export const mockSessions: TSession[] = [1, 2].map((item, index) => {
   return {
+    key: index,
     id: index,
     sessionName: `Mock Session ${index}`,
     exercises: [
@@ -49,18 +41,19 @@ export default function index() {
   const router = useRouter();
   const currentPath = usePathname();
 
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
   useEffect(() => {
     setSessions(mockSessions);
   });
 
   return (
-    <View style={style.viewport}>
+    <View style={styles.viewport}>
       {sessions &&
         sessions.map((session) => {
           return (
-            <>
+            <View key={session.id}>
               <Button
-                key={session.id}
                 title={session.sessionName}
                 onPress={() =>
                   goToStartSession({
@@ -72,58 +65,50 @@ export default function index() {
                 }
               />
               <Divider />
-            </>
+            </View>
           );
         })}
 
       <Button
         title="Create Session"
         onPress={() => {
-          router.push("/CreateSession");
+          // router.push("/CreateSession");
+          setOpenModal(!openModal);
         }}
       />
-      {/* <Drawer.Section showDivider={false} style={style.drawerport}>
-        {sessions &&
-          sessions.map((session) => {
-            return (
-              <Drawer.Item
-                key={session.id}
-                label={session.sessionName}
-                onPress={() =>
-                  goToStartSession({
-                    params: {
-                      backPath: currentPath as RelativePathString,
-                      sessionId: session.id,
-                    },
-                  })
-                }
-              />
-            );
-          })}
-
-        <Drawer.Item
-          label="Add new session"
-          onPress={() => {
-            router.push("/CreateSession")
-          }}
-        />
-      </Drawer.Section> */}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={openModal}
+        onRequestClose={() => {
+          setOpenModal(!openModal);
+        }}
+      >
+        <SafeAreaView>
+          <CreateSession />
+          <Button
+            title="close modal"
+            onPress={() => {
+              setOpenModal(!openModal);
+            }}
+          />
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   viewport: {
-    marginVertical: 24,
+    marginVertical: styleConstant.marginLarge,
     flex: 1,
-    gap: 12,
-  },
-  drawerport: {
-    flex: 1,
-    gap: 12,
+    gap: styleConstant.gapMedium,
   },
   button: {
-    marginHorizontal: 24,
-    marginVertical: 12,
+    marginHorizontal: styleConstant.marginLarge,
+    marginVertical: styleConstant.marginMedium,
   },
+  modal: {
+    backgroundColor: 'white'
+  }
 });
