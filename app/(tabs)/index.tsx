@@ -41,8 +41,6 @@ export default function index() {
   const router = useRouter();
   const currentPath = usePathname();
 
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
   useEffect(() => {
     setSessions(mockSessions);
   });
@@ -68,32 +66,7 @@ export default function index() {
             </View>
           );
         })}
-
-      <Button
-        title="Create Session"
-        onPress={() => {
-          // router.push("/CreateSession");
-          setOpenModal(!openModal);
-        }}
-      />
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={openModal}
-        onRequestClose={() => {
-          setOpenModal(!openModal);
-        }}
-      >
-        <SafeAreaView>
-          <CreateSession />
-          <Button
-            title="close modal"
-            onPress={() => {
-              setOpenModal(!openModal);
-            }}
-          />
-        </SafeAreaView>
-      </Modal>
+      <CreateSession />
     </View>
   );
 }

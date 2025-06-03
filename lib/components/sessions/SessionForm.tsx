@@ -31,6 +31,7 @@ export default function SessionForm(props: SessionFormProps) {
     if (props.exerciseId) {
       console.log("TODO: implement fetch exercise for update");
     }
+    console.log("useEffect SessionForm");
   });
 
   return (
@@ -48,16 +49,16 @@ export default function SessionForm(props: SessionFormProps) {
       </KeyboardAvoidingView>
       <Divider />
       <View style={styles.exerciseForm}>
-        <SafeAreaView >
-          <Text >
-            Testing-Testing-Testing
+        <View style={styles.exerciseNameView} >
+          <Text style={styles.exerciseName}  numberOfLines={1}>
+            Testing-Testing-Testing-Testing-Testing-Testing-Testing-Testing-Testing-Testing-Testing-Testing
           </Text>
-        </SafeAreaView>
+        </View>
 
         <View style={styles.innerExerciseForm}>
-          <Text >duplicate</Text>
-          <Text >remove</Text>
-          <Text >edit</Text>
+          <Text >COPY</Text>
+          <Text >DEL</Text>
+          <Text >EDIT</Text>
         </View>
       </View>
 
@@ -90,24 +91,25 @@ export default function SessionForm(props: SessionFormProps) {
         </SafeAreaView>
       </Modal>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           console.log("Create and save session");
         }}
         style={styles.textInput}
       >
         <Text>Create Session here</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   textInput: {
-    margin: styleConstant.gapMedium,
-    borderWidth: 1,
-    padding: styleConstant.paddingSmall,
-    borderRadius: styleConstant.boarderRadiusSmall,
+    // margin: styleConstant.gapMedium,
+    // borderWidth: 1,
+    padding: styleConstant.paddingMedium,
+    // borderRadius: styleConstant.boarderRadiusSmall,
+    fontSize: 28,
   },
   pressableButton: {
     margin: styleConstant.gapMedium,
@@ -119,17 +121,23 @@ const styles = StyleSheet.create({
     flexShrink : 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: styleConstant.gapMedium,
-    borderWidth: 1,
+    marginVertical: styleConstant.marginSmall,
+    borderWidth: 0.5,
     padding: styleConstant.paddingSmall,
     borderRadius: styleConstant.boarderRadiusSmall,
-    // height: 100,
   },
   innerExerciseForm: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
+    alignItems: 'center',
     gap: styleConstant.gapSmall,
-    height: '100%',
+    width: '50%'
   },
+  exerciseNameView: {
+    width: '60%',
+  },
+  exerciseName: {
+    fontSize: 18,
+  }
 });

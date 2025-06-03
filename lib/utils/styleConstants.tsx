@@ -5,5 +5,7 @@ export const styleConstant = {
     gapMedium: 12,
     gapSmall: 6,
     paddingSmall: 8,
+    paddingMedium: 12,
+    paddingLarge: 16,
     boarderRadiusSmall: 6,
 }
