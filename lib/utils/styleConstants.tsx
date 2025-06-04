@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 export const styleConstant = {
     marginLarge: 24,
     marginMedium: 12,
@@ -9,3 +11,49 @@ export const styleConstant = {
     paddingLarge: 16,
     boarderRadiusSmall: 6,
 }
+
+export const styles = StyleSheet.create({
+  textInputTitle: {
+    // margin: styleConstant.gapMedium,
+    // borderWidth: 1,
+    padding: styleConstant.paddingMedium,
+    // borderRadius: styleConstant.boarderRadiusSmall,
+    fontSize: 28,
+  },
+  textInputHeading: {
+    // margin: styleConstant.gapMedium,
+    // borderWidth: 1,
+    padding: styleConstant.paddingMedium,
+    // borderRadius: styleConstant.boarderRadiusSmall,
+    fontSize: 20,
+  },
+  pressableButton: {
+    margin: styleConstant.gapMedium,
+    borderWidth: 1,
+    padding: styleConstant.paddingSmall,
+    borderRadius: styleConstant.boarderRadiusSmall,
+  },
+  exerciseForm: {
+    flexShrink: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: styleConstant.marginSmall,
+    borderWidth: 0.5,
+    padding: styleConstant.paddingSmall,
+    borderRadius: styleConstant.boarderRadiusSmall,
+  },
+  innerExerciseForm: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: styleConstant.gapSmall,
+    width: "50%",
+  },
+  exerciseNameView: {
+    width: "60%",
+  },
+  exerciseName: {
+    fontSize: 18,
+  },
+});
