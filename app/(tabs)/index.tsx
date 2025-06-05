@@ -12,7 +12,7 @@ import { RelativePathString, usePathname, useRouter } from "expo-router";
 import { goToStartSession } from "../StartSession";
 import { TSession } from "@/lib/utils/types";
 import { styleConstant } from "@/lib/utils/styleConstants";
-import CreateSession from "../CreateSession";
+import CreateSession, { GoToCreateSession } from "../CreateSession";
 
 export const mockSessions: TSession[] = [1, 2].map((item, index) => {
   return {
@@ -21,16 +21,10 @@ export const mockSessions: TSession[] = [1, 2].map((item, index) => {
     sessionName: `Mock Session ${index}`,
     exercises: [
       {
-        id: 1,
         exerciseName: `Mock S${index} - Exercise 1`,
         description: `Mock S${index} - Description 1`,
-        sets: [
-          {
-            reps: 12,
-            weights: 15,
-            duration: 30,
-          },
-        ],
+        reps: 12,
+        weights: 15,
       },
     ],
   };
@@ -66,7 +60,7 @@ export default function index() {
             </View>
           );
         })}
-      <CreateSession />
+      <GoToCreateSession />
     </View>
   );
 }
@@ -82,6 +76,6 @@ const styles = StyleSheet.create({
     marginVertical: styleConstant.marginMedium,
   },
   modal: {
-    backgroundColor: 'white'
-  }
+    backgroundColor: "white",
+  },
 });

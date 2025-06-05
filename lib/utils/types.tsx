@@ -6,10 +6,13 @@ export type TSets = {
 };
 
 export type TExercise = {
-  id: number;
+  id?: number;
   exerciseName: string;
   description: string;
-  sets: TSets[];
+  reps: number;
+  weights: number; // 0 equal to body weight / no weight is used
+  duration?: number; // duration mainly used for cardio, such as HIIT or low intensity, Experimental atm
+  // sets: TSets[];
 };
 
 export type TSession = {

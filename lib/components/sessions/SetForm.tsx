@@ -1,7 +1,6 @@
-import { styles } from "@/lib/utils/styleConstants";
 import { TSets } from "@/lib/utils/types";
 import React, { useState } from "react";
-import { Button, Modal, SafeAreaView, Text, TextInput, View } from "react-native";
+import { Button, Modal, SafeAreaView, Text, View } from "react-native";
 
 interface SetFormProps {
   setId: number;
