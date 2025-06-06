@@ -1,99 +1,152 @@
-// import { styles } from "@/lib/utils/styleConstants";
-// import { TExercise } from "@/lib/utils/types";
-// import React, { useState } from "react";
-// import {
-//   Button,
-//   Modal,
-//   SafeAreaView,
-//   Text,
-//   TextInput,
-//   View,
-// } from "react-native";
-// import SetForm from "./SetForm";
+import { globalStyles } from "@/lib/utils/styleConstants";
+import { TExercise } from "@/lib/utils/types";
+import { useEffect, useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
-// interface ExerciseFormProps {
-//   exerciseId: number;
-//   callBackFn: (value: TExercise) => void;
-// }
+interface ExerciseFormProps {
+  value: TExercise;
+  onCopy: () => void;
+  onUp: () => void;
+  onDown: () => void;
+  editMode: boolean;
+  onDelete: () => void;
+  onSave: (saveItem: TExercise) => void;
+}
 
-// const defaultValue = {
-//   exerciseName: "",
-//   description: "",
-//   sets: [],
-// };
+export default function ExerciseForm(props: ExerciseFormProps) {
+  const [edit, setEdit] = useState(false);
 
-// export default function ExerciseForm(props: ExerciseFormProps) {
-//   const [openModal, setOpenModal] = useState<boolean>(false);
+  useEffect(() => {
+    if (!props.editMode) setEdit(false);
+    if (!edit) setTempExercise(props.value);
+    console.log("ExerciseForm");
+  });
 
-//   const [exercise, setExercise] = useState<TExercise>({
-//     id: props.exerciseId,
-//     ...defaultValue,
-//   });
+  const [tempExercise, setTempExercise] = useState(props.value);
 
-//   return (
-//     <View>
-//       <Button
-//         title="Add Exercise"
-//         onPress={() => {
-//           setOpenModal(!openModal);
-//         }}
-//       />
-//       <Modal
-//         animationType="fade"
-//         transparent={false}
-//         visible={openModal}
-//         onRequestClose={() => {
-//           setOpenModal(!openModal);
-//         }}
-//       >
-//         <SafeAreaView>
-//           <View>
-//             <Text>Exercise - {exercise.id + 1}</Text>
-//             <TextInput
-//               style={styles.textInputTitle}
-//               onChangeText={(value) => {
-//                 setExercise({ ...exercise, exerciseName: value });
-//               }}
-//               value={exercise.exerciseName}
-//               placeholder="Exercise name"
-//             />
-//             <TextInput
-//               style={styles.textInputHeading}
-//               onChangeText={(value) => {
-//                 setExercise({ ...exercise, description: value });
-//               }}
-//               value={exercise.description}
-//               placeholder="Description"
-//             />
-//             {exercise.sets.map((set, index) => (
-//               <Text key={exercise.exerciseName + exercise.id + set.id}>
-//                 {set.id}
-//               </Text>
-//             ))}
-//           </View>
+  return (
+    <>
+      <View style={globalStyles.exerciseForm}>
+        <View style={globalStyles.exerciseNameView}>
+          <Text style={globalStyles.exerciseName} numberOfLines={1}>
+            {props.value.exerciseName}
+          </Text>
+        </View>
 
-//           <SetForm
-//             setId={exercise.sets.length + 1}
-//             callBackFn={(set) =>
-//               setExercise({ ...exercise, sets: [...exercise.sets, set] })
-//             }
-//           />
+        <View style={globalStyles.innerExerciseForm}>
+          {props.editMode ? (
+            <>
+              {edit ? (
+                <>
+                  <Pressable
+                    onPress={() => {
+                      setEdit(!edit);
+                    }}
+                  >
+                    <Text>[CANCEL]</Text>
+                  </Pressable>
 
-//           <Button
-//             title="Done"
-//             onPress={() => {
-//               if (exercise.exerciseName != "" && exercise.sets.length > 0) {
-//                 props.callBackFn(exercise);
-//               }
-//               setExercise({
-//                 id: props.exerciseId,
-//                 ...defaultValue,
-//               });
-//               setOpenModal(!openModal);
-//             }}
-//           />
-//         </SafeAreaView>
-//       </Modal>
-//     </View>
-//   );
-// }
+                  <Pressable
+                    onPress={() => {
+                      props.onSave(tempExercise);
+                      setEdit(!edit);
+                    }}
+                  >
+                    <Text>[SAVE]</Text>
+                  </Pressable>
+                </>
+              ) : (
+                <>
+                  <Pressable onPress={() => props.onDelete()}>
+                    <Text>[DEL]</Text>
+                  </Pressable>
+                  <Pressable onPress={() => setEdit(!edit)}>
+                    <Text>[EDIT]</Text>
+                  </Pressable>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <Pressable onPress={() => props.onCopy()}>
+                <Text>[CP]</Text>
+              </Pressable>
+              <Pressable onPress={() => props.onUp()}>
+                <Text>[UP]</Text>
+              </Pressable>
+              <Pressable onPress={() => props.onDown()}>
+                <Text>[DN]</Text>
+              </Pressable>
+            </>
+          )}
+        </View>
+      </View>
+      {edit && (
+        <KeyboardAvoidingView>
+          <Text>
+            Exercise Name:{" "}
+            <TextInput
+              onChangeText={(text) =>
+                setTempExercise({ ...tempExercise, exerciseName: text })
+              }
+              value={tempExercise.exerciseName}
+            />
+          </Text>
+
+          <Text>
+            Exercise Description:{" "}
+            <TextInput
+              onChangeText={(text) =>
+                setTempExercise({ ...tempExercise, description: text })
+              }
+              value={tempExercise.description}
+            />
+          </Text>
+
+          <Text>
+            Repetitions:{" "}
+            <TextInput
+              onChangeText={(text) =>
+                setTempExercise({ ...tempExercise, reps: +text })
+              }
+              value={tempExercise.reps ? tempExercise.reps.toString() : "0"}
+              dataDetectorTypes="phoneNumber"
+            />
+          </Text>
+
+          <Text>
+            Weights:{" "}
+            <TextInput
+              onChangeText={(text) =>
+                setTempExercise({ ...tempExercise, weights: +text })
+              }
+              value={
+                tempExercise.weights ? tempExercise.weights.toString() : "0"
+              }
+              dataDetectorTypes="phoneNumber"
+            />
+          </Text>
+
+          <Text>
+            Durations:{" "}
+            <TextInput
+              onChangeText={(text) =>
+                setTempExercise({ ...tempExercise, duration: +text })
+              }
+              value={
+                tempExercise.duration ? tempExercise.duration.toString() : "0"
+              }
+              dataDetectorTypes="phoneNumber"
+            />
+          </Text>
+        </KeyboardAvoidingView>
+      )}
+    </>
+  );
+}

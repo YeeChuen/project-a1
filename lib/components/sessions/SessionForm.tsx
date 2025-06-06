@@ -15,6 +15,7 @@ import { TExercise } from "../../utils/types";
 import { mockSessions } from "@/app/(tabs)";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ExerciseForm from "./ExerciseForm";
 
 interface SessionFormProps {
   sessionId?: number;
@@ -57,7 +58,7 @@ export default function SessionForm(props: SessionFormProps) {
       </KeyboardAvoidingView>
 
       <View style={globalStyles.sessionFormButtonContainer}>
-        <Button title="Edit" onPress={() => setEdit(!edit)} />
+        <Button title={edit ? "Save" : "Edit"} onPress={() => setEdit(!edit)} />
 
         <Button
           title="Add Exercise"
@@ -81,22 +82,23 @@ export default function SessionForm(props: SessionFormProps) {
       <ScrollView scrollEnabled={true}>
         {mockSessions[0].exercises.map((exercise, index) => {
           return (
-            <ExerciseView
+            <ExerciseForm
               key={exercise.exerciseName + index}
               value={exercise}
               onCopy={() => console.log("This is mock data")}
               onUp={() => console.log("This is mock data")}
               onDown={() => console.log("This is mock data")}
               onDelete={() => console.log("This is mock data")}
-              onEdit={() => console.log("This is mock data")}
+              // onEdit={() => console.log("This is mock data")}
               editMode={edit}
+              onSave={(saveItem: TExercise) => console.log(saveItem)}
             />
           );
         })}
         {exercises &&
           exercises.map((exercise, index) => {
             return (
-              <ExerciseView
+              <ExerciseForm
                 key={exercise.exerciseName + index}
                 value={exercise}
                 onCopy={() => {
@@ -114,9 +116,18 @@ export default function SessionForm(props: SessionFormProps) {
                   newExercises.splice(index, 1);
                   setExercises([...newExercises, exercise]);
                 }}
-                onDelete={() => console.log("This is mock data")}
-                onEdit={() => console.log("This is mock data")}
+                onDelete={() => {
+                  const newExercises = [...exercises];
+                  newExercises.splice(index, 1);
+                  setExercises(newExercises);
+                }}
+                // onEdit={() => console.log("This is mock data")}
                 editMode={edit}
+                onSave={(saveItem: TExercise) => {
+                  const newExercises = [...exercises];
+                  newExercises.splice(index, 1, saveItem);
+                  setExercises(newExercises);
+                }}
               />
             );
           })}
@@ -124,52 +135,5 @@ export default function SessionForm(props: SessionFormProps) {
 
       <Divider />
     </SafeAreaView>
-  );
-}
-
-interface ExerciseViewProps {
-  value: TExercise;
-  onCopy: () => void;
-  onUp: () => void;
-  onDown: () => void;
-  editMode: boolean;
-  onDelete: () => void;
-  onEdit: () => void;
-}
-
-function ExerciseView(props: ExerciseViewProps) {
-  return (
-    <KeyboardAvoidingView style={globalStyles.exerciseForm}>
-      <View style={globalStyles.exerciseNameView}>
-        <Text style={globalStyles.exerciseName} numberOfLines={1}>
-          {props.value.exerciseName}
-        </Text>
-      </View>
-
-      <View style={globalStyles.innerExerciseForm}>
-        {props.editMode ? (
-          <>
-            <Pressable onPress={() => props.onDelete()}>
-              <Text>[DEL]</Text>
-            </Pressable>
-            <Pressable onPress={() => props.onEdit()}>
-              <Text>[EDIT]</Text>
-            </Pressable>
-          </>
-        ) : (
-          <>
-            <Pressable onPress={() => props.onCopy()}>
-              <Text>[CP]</Text>
-            </Pressable>
-            <Pressable onPress={() => props.onUp()}>
-              <Text>[UP]</Text>
-            </Pressable>
-            <Pressable onPress={() => props.onDown()}>
-              <Text>[DN]</Text>
-            </Pressable>
-          </>
-        )}
-      </View>
-    </KeyboardAvoidingView>
   );
 }
