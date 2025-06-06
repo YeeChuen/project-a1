@@ -68,4 +68,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "space-between",
     marginHorizontal: styleConstant.marginSmall,
   },
+  flexComponent: {
+    flex: 1,
+  },
 });

@@ -3,7 +3,9 @@ import { TExercise } from "@/lib/utils/types";
 import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
+  Platform,
   Pressable,
+  ScrollView,
   Text,
   TextInput,
   View,
@@ -63,6 +65,9 @@ export default function ExerciseForm(props: ExerciseFormProps) {
                 </>
               ) : (
                 <>
+                  <Pressable onPress={() => props.onCopy()}>
+                    <Text>[COPY]</Text>
+                  </Pressable>
                   <Pressable onPress={() => props.onDelete()}>
                     <Text>[DEL]</Text>
                   </Pressable>
@@ -74,9 +79,6 @@ export default function ExerciseForm(props: ExerciseFormProps) {
             </>
           ) : (
             <>
-              <Pressable onPress={() => props.onCopy()}>
-                <Text>[CP]</Text>
-              </Pressable>
               <Pressable onPress={() => props.onUp()}>
                 <Text>[UP]</Text>
               </Pressable>
@@ -88,7 +90,11 @@ export default function ExerciseForm(props: ExerciseFormProps) {
         </View>
       </View>
       {edit && (
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={500}
+        >
           <Text>
             Exercise Name:{" "}
             <TextInput
@@ -115,8 +121,8 @@ export default function ExerciseForm(props: ExerciseFormProps) {
               onChangeText={(text) =>
                 setTempExercise({ ...tempExercise, reps: +text })
               }
-              value={tempExercise.reps ? tempExercise.reps.toString() : "0"}
-              dataDetectorTypes="phoneNumber"
+              value={tempExercise.reps ? tempExercise.reps.toString() : "1"}
+              keyboardType="number-pad"
             />
           </Text>
 
@@ -129,11 +135,11 @@ export default function ExerciseForm(props: ExerciseFormProps) {
               value={
                 tempExercise.weights ? tempExercise.weights.toString() : "0"
               }
-              dataDetectorTypes="phoneNumber"
+              keyboardType="number-pad"
             />
           </Text>
 
-          <Text>
+          <Text style={globalStyles.flexComponent}>
             Durations:{" "}
             <TextInput
               onChangeText={(text) =>
@@ -142,7 +148,7 @@ export default function ExerciseForm(props: ExerciseFormProps) {
               value={
                 tempExercise.duration ? tempExercise.duration.toString() : "0"
               }
-              dataDetectorTypes="phoneNumber"
+              keyboardType="number-pad"
             />
           </Text>
         </KeyboardAvoidingView>
